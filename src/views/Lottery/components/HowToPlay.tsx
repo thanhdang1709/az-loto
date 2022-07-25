@@ -3,6 +3,14 @@ import { Box, Flex, Text, Heading, Link, Image, useMatchBreakpointsContext } fro
 import { useTranslation } from 'contexts/Localization'
 import useTheme from 'hooks/useTheme'
 import { BallWithNumber, MatchExampleA, MatchExampleB, PoolAllocationChart } from '../svgs'
+import PageSection from 'components/PageSection'
+
+export const TITLE_BG = 'linear-gradient(180deg, rgb(41, 231, 232) -50%, #131340 100%)'
+export const GET_TICKETS_BG = '#20204e'
+export const CHECK_PRIZES_BG = '#0e0e32'
+export const FINISHED_ROUNDS_BG = '#0e0e32'
+export const FINISHED_ROUNDS_BG_DARK = 'linear-gradient(180deg, rgb(41, 231, 232) -50%, #131340 100%)'
+
 
 const Divider = styled.div`
   background-color: ${({ theme }) => theme.colors.cardBorder};
@@ -30,10 +38,9 @@ const BulletList = styled.ul`
 `
 
 const StepContainer = styled(Flex)`
-  gap: 24px;
+  gap: 30px;
   padding-bottom: 40px;
-  width: 100%;
-  color: #ffffff
+  color: #ffffff;
   flex-direction: column;
   ${({ theme }) => theme.mediaQueries.md} {
     flex-direction: row;
@@ -42,12 +49,13 @@ const StepContainer = styled(Flex)`
 
 const StyledStepCard = styled(Box)`
   display: flex;
-  align-self: baseline;
   position: relative;
   padding: 1px 1px 3px 1px;
   border-radius: ${({ theme }) => theme.radii.card};
+  ${({ theme }) => theme.mediaQueries.md} {
+    margin-top: 10px;
+  }
 `
-
 const StepCardInner = styled(Box)`
   width: 100%;
   padding: 10px;
@@ -132,7 +140,6 @@ const FeatureCard = styled.div`
   box-shadow: inset 0 0 15px rgb(55 245 249 / 85%);
   border: 2px solid transparent;
   height: 100%;
-
     &:hover {
       box-shadow: 0 5px 15px #37f5f940, inset 0 0 15px #37f5f9d9;
       border-color: #37f5f9;
@@ -145,6 +152,7 @@ const FeatureCardIcon = styled.div`
   font-size: 3.5rem;
     line-height: 1;
 `
+
 
 type Step = { title: string; subtitle: string; label: string }
 
@@ -338,8 +346,17 @@ const HowToPlay: React.FC = () => {
     },
   ]
   return (
-    <Box width="100%">
-      <Flex mb="40px" alignItems="center" flexDirection="column">
+    <PageSection
+    containerProps={{ style: { marginTop: '-30px' } }}
+    innerProps={{ style: { margin: '0', width: '100%' } }}
+    background={CHECK_PRIZES_BG}
+    concaveDivider
+    clipFill={{ light: CHECK_PRIZES_BG }}
+    dividerPosition="top"
+    index={2}
+  >
+   
+      <Flex mb="40px" width="100%" flexDirection="column" alignItems="center" justifyContent="center">
         <Heading mb="24px" scale="xl" color="white">
           {t('It\'s Easy to Join and get reward')}
         </Heading>
@@ -356,48 +373,50 @@ const HowToPlay: React.FC = () => {
         ))}
       </StepContainer> */}
       <Divider />
-      <GappedFlex flexDirection={['column', 'column', 'column', 'row']}>
-        <Flex flex="3" flexDirection="column">
+      
           <Heading mb="24px" scale="lg" color="white">
             {t('Why You Trust Our Service')}
           </Heading>
-          <Flex>
-          <FeatureCard>
-            <FeatureCardIcon>
-            
-            </FeatureCardIcon>
-          <Text mb="16px" color="white" fontSize="2rem">
-            {t('Lottery')}
-          </Text>
-          <Text display="inline" color="textSubtle">
-                {t(
-                  'We provide transparency with the support of chainlink VRF.',
-                )}
-              </Text>
-          </FeatureCard>
-          <FeatureCard>
-          <Text mb="16px" color="white" fontSize="2rem">
-            {t('Value')}
-          </Text>
-          <Text display="inline" color="textSubtle">
-                {t(
-                  'We\'re going to burn a token value in the long term.',
-                )}
-              </Text>
-          </FeatureCard>
-          <FeatureCard>
-          <Text mb="16px" color="white" fontSize="2rem">
-            {t('VRF Supported')}
-          </Text>
-          <Text display="inline" color="textSubtle">
-                {t(
-                  'We bring entertainment platform - make money based on blockchain\nBring interesting experience to holders.',
-                )}
-              </Text>
-          </FeatureCard>
-          </Flex>
-        </Flex>
-      </GappedFlex>
+          <StepContainer >
+            <StyledStepCard>
+                <FeatureCard>
+                <Text mb="16px" color="white" fontSize="2rem">
+                  {t('Lottery')}
+                </Text>
+                <Text display="inline" color="textSubtle">
+                      {t(
+                        'We provide transparency with the support of chainlink VRF.',
+                      )}
+                    </Text>
+                </FeatureCard>
+            </StyledStepCard>
+          <StyledStepCard>
+            <FeatureCard>
+            <Text mb="16px" color="white" fontSize="2rem">
+              {t('Value')}
+            </Text>
+            <Text display="inline" color="textSubtle">
+                  {t(
+                    'We\'re going to burn a token value in the long term.',
+                  )}
+                </Text>
+            </FeatureCard>
+          </StyledStepCard>
+          <StyledStepCard>
+            <FeatureCard>
+            <Text mb="16px" color="white" fontSize="2rem">
+              {t('VRF Supported')}
+            </Text>
+            <Text display="inline" color="textSubtle">
+                  {t(
+                    'We bring entertainment platform - make money based on blockchain\nBring interesting experience to holders.',
+                  )}
+                </Text>
+            </FeatureCard>
+          </StyledStepCard>
+          
+          </StepContainer >
+
       <Divider />
       
       <GappedFlex flexDirection={['column', 'column', 'column', 'row']}>
@@ -474,7 +493,7 @@ const HowToPlay: React.FC = () => {
             <li>
               <Text display="inline" color="textSubtle">
                 {t(
-                  'An average total of 35,000 AZW from the treasury is added to lottery rounds over the course of a week. This AZW is of course also included in rollovers! Read more in our guide to ',
+                  'An average total of  AZW Trading Volume from the treasury is added to lottery rounds over the course of a week. This AZW is of course also included in rollovers! Read more in our guide to ',
                 )}
                 {/* <InlineLink href="https://docs.pancakeswap.finance/tokenomics/cake/cake-tokenomics">
                   {t('AZW Tokenomics')}
@@ -502,7 +521,8 @@ const HowToPlay: React.FC = () => {
           </Text>
         </Flex>
       </Flex> */}
-    </Box>
+    
+    </PageSection>
   )
 }
 

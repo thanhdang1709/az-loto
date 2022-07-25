@@ -31,13 +31,15 @@ const LotteryPage = styled.div`
 `
 
 const StepContainer = styled(Flex)`
-  gap: 24px;
+  
   padding-bottom: 40px;
   width: 100%;
-  color: #ffffff
+  color: #ffffff;
   flex-direction: column;
+  gap: 60px;
   ${({ theme }) => theme.mediaQueries.md} {
     flex-direction: row;
+    gap: 24px;
   }
 `
 
@@ -258,10 +260,13 @@ const Lottery = () => {
             )}
           </Flex>
         </PageSection>
+        
         <PageSection
+          containerProps={{ style: { marginTop: '-30px' } }}
+          background={CHECK_PRIZES_BG}
+          concaveDivider
+          clipFill={{ light: CHECK_PRIZES_BG }}
           dividerPosition="top"
-          dividerFill={{ light: theme.colors.background }}
-          clipFill={{ light: '#9A9FD0', dark: theme.colors.background }}
           index={2}
         >
           <HowToPlay />
